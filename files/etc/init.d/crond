@@ -1,0 +1,36 @@
+#!/bin/sh
+########################################################################
+. /lib/lsb/init-functions
+
+case "$1" in
+   start)
+      log_info_msg "Starting crond..."
+      mkdir -p /var/spool/cron
+      ln -s /etc/crontabs /var/spool/cron/ 2>/dev/null
+      start_daemon /usr/sbin/crond
+      evaluate_retval
+      ;;
+
+   stop)
+      log_info_msg "Stopping crond..."
+      killproc /usr/sbin/crond
+      evaluate_retval
+      ;;
+
+   restart)
+      $0 stop
+      sleep 1
+      $0 start
+      ;;
+
+   status)
+      statusproc /usr/sbin/crond
+      ;;
+
+   *) 
+      echo "Usage: $0 {start|stop|restart|status}"
+      exit 1
+      ;;
+esac
+
+# End crond

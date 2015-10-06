@@ -1,0 +1,5 @@
+#!/bin/sh
+
+find /var/log/ ! -name "*.gz" -mindepth 1 -exec gzip -f {} \;
+rm /run/var/bootlog
+/etc/init.d/sysklogd restart

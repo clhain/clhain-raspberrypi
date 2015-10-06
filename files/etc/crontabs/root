@@ -1,0 +1,8 @@
+# m h  dom mon dow   command
+00 0 * * 1 /bin/update-ca.sh > /var/log/ca-update.log
+00 0 * * * /sbin/movelogs > /dev/null
+*/30 * * * * /sbin/move_test_data.py > /dev/null
+*/5 * * * * /usr/local/wmd/sbin/wmdd.py > /dev/null
+*/5 * * * * /usr/local/wmd/sbin/latency_matrixd.py > /dev/null
+*/5 * * * * /sbin/checkdate > /dev/null
+*/5 * * * * /usr/local/wmd/sbin/process_manager.sh > /dev/null

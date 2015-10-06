@@ -1,0 +1,32 @@
+*filter
+-P INPUT DROP
+-P OUTPUT DROP
+-P FORWARD DROP
+-A INPUT -p ipv6-icmp --icmpv6-type time-exceeded -j ACCEPT
+-A INPUT -p ipv6-icmp --icmpv6-type echo-request -j ACCEPT
+-A INPUT -p ipv6-icmp --icmpv6-type echo-reply -j ACCEPT
+-A OUTPUT -p ipv6-icmp --icmpv6-type echo-request -j ACCEPT
+-A OUTPUT -p ipv6-icmp --icmpv6-type echo-reply -j ACCEPT
+-A INPUT -p ipv6-icmp --icmpv6-type neighbour-advertisement -j ACCEPT
+-A INPUT -p ipv6-icmp --icmpv6-type neighbour-solicitation -j ACCEPT
+-A INPUT -p ipv6-icmp --icmpv6-type router-advertisement -j ACCEPT
+-A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-advertisement -j ACCEPT
+-A OUTPUT -p ipv6-icmp --icmpv6-type neighbour-solicitation -j ACCEPT
+-A OUTPUT -p ipv6-icmp --icmpv6-type router-solicitation -j ACCEPT
+-A INPUT -i lo -j ACCEPT 
+-A INPUT -i eth0 -p tcp -m state --state NEW,ESTABLISHED --dport 22 -j ACCEPT 
+-A OUTPUT -o eth0 -p tcp -m state --state ESTABLISHED --sport 22 -j ACCEPT
+-A OUTPUT -p tcp --dport 80 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A INPUT -p tcp --sport 80 -m state --state ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp --dport 443 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A INPUT -p tcp --sport 443 -m state --state ESTABLISHED -j ACCEPT
+-A OUTPUT -p udp --dport 53 -j ACCEPT
+-A INPUT -p udp --sport 53 -j ACCEPT
+-A OUTPUT -o eth0 -p udp --dport 123 -j ACCEPT
+-A INPUT -i eth0 -p udp --sport 123 -j ACCEPT
+-A OUTPUT -o eth0 -p udp --dport 514 -j ACCEPT
+-A OUTPUT -p udp --dport 33200:33500 -m state --state NEW,ESTABLISHED -j ACCEPT
+-A OUTPUT -p udp --sport 33200:33500 -m state --state ESTABLISHED -j ACCEPT
+-A INPUT -j REJECT --reject-with icmp6-adm-prohibited 
+-A FORWARD -j REJECT --reject-with icmp6-adm-prohibited
+COMMIT

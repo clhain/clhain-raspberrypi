@@ -1,0 +1,25 @@
+#!/bin/sh
+########################################################################
+# Begin mountfs
+#
+# Description : Mount everything else in fstab.
+#
+########################################################################
+. /lib/lsb/init-functions
+
+case "${1}" in
+   start)
+      log_info_msg "Mounting other filesystems: " 
+
+      mount -na > /dev/null
+      (exit ${failed})
+      evaluate_retval
+      exit $failed
+      ;;
+
+   *)
+      echo "Usage: ${0} {start}"
+      exit 1
+      ;;
+esac
+

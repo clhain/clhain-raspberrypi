@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if [ -n "`date | grep 1970`" ]; then
+  killall ntpd
+  ntpdate -u time1.google.com
+  /etc/init.d/ntpd start 
+fi

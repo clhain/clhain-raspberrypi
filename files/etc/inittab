@@ -1,0 +1,9 @@
+::sysinit:/etc/init.d/rcS
+::respawn:/sbin/getty -L 38400 tty1 
+
+# Stuff to do when restarting the init process
+::restart:/sbin/init
+
+# Stuff to do before rebooting
+::ctrlaltdel:/sbin/reboot
+::shutdown:/bin/umount -a -r

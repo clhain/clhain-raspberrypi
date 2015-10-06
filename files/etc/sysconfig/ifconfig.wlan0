@@ -1,0 +1,5 @@
+ONBOOT=no
+IFACE=wlan0
+SERVICE='dhcpcd'
+DHCP_START='-m 100 -t 10'
+DHCP_STOP=-k

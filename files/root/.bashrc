@@ -1,0 +1,2 @@
+. ~/.profile
+cd /root

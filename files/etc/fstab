@@ -1,0 +1,15 @@
+# Begin /etc/fstab
+# file system  mount-point  type   options                           dump  fsck
+#                                                                          order
+rootfs   /                      ext4   defaults                        1     1
+none     /dev/pts               devpts noauto                          0     0
+proc     /proc                  proc   noauto                          0     0
+sysfs    /sys                   sysfs  noauto                          0     0
+tmpfs    /run                   tmpfs  noauto                          0     0
+tmpfs    /tmp                   tmpfs  nodev,size=25m                  0     0
+tmpfs    /var/log               tmpfs  nodev,size=50m                  0     0
+tmpfs    /var/run               tmpfs  nodev,size=10m                  0     0
+tmpfs    /var/db                tmpfs  nodev,size=10m                  0     0
+tmpfs    /var/spool             tmpfs  nodev,size=10m                  0     0
+tmpfs    /usr/local/wmd/tmp     tmpfs  nodev,size=25m                   0     0
+tmpfs    /local_rw              tmpfs  nodev,size=50m                   0     0

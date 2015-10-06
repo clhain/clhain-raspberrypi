@@ -1,0 +1,47 @@
+#!/bin/sh
+
+#   ---------------------------------------------
+#   Wait for clocksource msg, then start initing
+#   ---------------------------------------------
+sleep 1
+echo  "Initializing from /etc/init.d/rcS:  "
+
+#   ---------------------------------------------
+#   Mount viratual systems
+#   ---------------------------------------------
+echo -n "Mount /proc :          "
+mount -vt proc proc /proc
+if [ "${?}" -ne "0" ]; then
+        echo "[ FAIL ]"
+else
+        echo "[ OK ]"
+fi
+echo -n "Mount /sys  :          "
+mount -vt sysfs sysfs /sys
+if [ "${?}" -ne "0" ]; then
+        echo "[ FAIL ]"
+else
+        echo "[ OK ]"
+fi
+
+#   ---------------------------------------------
+#   Populate /dev
+#   ---------------------------------------------
+echo -n "Start udev  :          "
+/etc/init.d/udev start
+if [ "${?}" -ne "0" ]; then
+        echo "[ FAIL ]"
+else
+        echo "[ OK ]"
+fi
+
+#   ---------------------------------------------
+#   Mount the default file systems
+#   ---------------------------------------------
+echo -n "Mount fstab :          "
+mount -a
+if [ "${?}" -ne "0" ]; then
+        echo "[ FAIL ]"
+else
+        echo "[ OK ]"
+fi
